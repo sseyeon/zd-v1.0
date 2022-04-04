@@ -3,6 +3,8 @@ import { View, Text, ScrollView, StyleSheet, useWindowDimensions } from 'react-n
 import CustomInput from "../../components/CustomInput";
 import CustomButton from "../../components/CustomButton";
 import { useNavigation } from "@react-navigation/native";
+import axios from "axios";
+
 
 const SignUpScreen = () => {
     const [username, setUsername] = useState('');
@@ -14,13 +16,38 @@ const SignUpScreen = () => {
     const navigation = useNavigation();
 
     const onSignInPressed = () => {
-        navigation.navigate('SignUp02');
+        if (username == '') {
 
+        }
+        if (password !== passwordRepeat) {
+            console.warn('비밀번호를 확인해주세요.');
+        } else {
+            axios.post( 'https://jeeolzzps5.execute-api.us-east-1.amazonaws.com/dev/v1/auth/register/email', 
+            { 
+                email: email, 
+                pw: password 
+            }, 
+            { 
+                headers: { 
+                    'Content-type': 'application/json', 
+                    'Accept': 'application/json'
+                } 
+            } ) 
+            .then((response) => {
+                console.warn(response.data.authorization);
+                navigation.navigate('SignUp02', { authkey: response.data.authorization }); 
+                // navigation.navigate('SignUp02', { authkey: response.authorization }); 
+            }) 
+            .catch((response) => {
+                // console.warn(response);
+                    console.warn('중복된 사용자 정보 입니다.');
+                    navigation.navigate('SignUp02', {authkey: 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MTgsImVtYWlsIjoic2V5amVvbmdAd2l6YmFzZS5jby5rciIsIm5hbWUiOm51bGwsInBob25lX251bWJlciI6bnVsbCwicHJvZmlsZV9pbWciOm51bGwsInNuc190eXBlIjpudWxsfQ.XxSOOUbtGOjYLd4mzrct0fP4XLrBcR2zBjRyxDDeluQ'}); 
+
+                // if (response.status === '200') {
+                // }
+            });
+        }
     }
-    const onForgetPasswordPressed = () => {
-        console.warn('ㅎㅚ원ㅏㅣ');
-    }
-    
 
     return (
         <ScrollView showsVerticalScrollIndicator={false}>

@@ -1,9 +1,9 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import { View, Text, Image, StyleSheet, useWindowDimensions } from 'react-native';
 import Logo from '../../../assets/images/logo-social.png';
 import CustomInput from "../../components/CustomInput";
 import CustomButton from "../../components/CustomButton";
-
+import axios from "axios";
 import { useNavigation } from "@react-navigation/native";
 
 const SignInScreen = () => {
@@ -13,12 +13,18 @@ const SignInScreen = () => {
     const {height} = useWindowDimensions();
     const navigation = useNavigation();
 
+    const [data, setData] = useState('');
+    useEffect(()=>{
+        axios.get('https://jeeolzzps5.execute-api.us-east-1.amazonaws.com/dev/v1/api/user/me')
+        .then(res=>setData(res.data))
+    }, []);
+    console.log(setData);
     const onSignInPressed = () => {
         // validateUser
         navigation.navigate('Home');
     }
     const onRegisterPressed = () => {
-        console.warn('ㅎㅚ원ㅏㅣ');
+        // console.warn('ㅎㅚ원ㅏㅣ');
         navigation.navigate('SignUp');
     }
     
