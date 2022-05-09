@@ -34,8 +34,8 @@ const SignUpScreen = () => {
                 } 
             } ) 
             .then((response) => {
-                console.warn(response.data.authorization);
-                navigation.navigate('SignUp02', { authkey: response.data.authorization }); 
+                console.warn(response.data.Authorization);
+                navigation.navigate('SignUp02', { authkey: response.data.Authorization }); 
                 // navigation.navigate('SignUp02', { authkey: response.authorization }); 
             }) 
             .catch((response) => {

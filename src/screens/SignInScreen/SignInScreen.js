@@ -13,18 +13,28 @@ const SignInScreen = () => {
     const {height} = useWindowDimensions();
     const navigation = useNavigation();
 
-    const [data, setData] = useState('');
-    useEffect(()=>{
-        axios.get('https://jeeolzzps5.execute-api.us-east-1.amazonaws.com/dev/v1/api/user/me')
-        .then(res=>setData(res.data))
-    }, []);
-    console.log(setData);
     const onSignInPressed = () => {
+            axios.post( 'https://jeeolzzps5.execute-api.us-east-1.amazonaws.com/dev/v1/auth/login/email', 
+            { 
+                email: username, 
+                pw: password 
+            }, 
+            { 
+                headers: { 
+                    'Content-type': 'application/json', 
+                    'Accept': 'application/json'
+                } 
+            } ) 
+            .then((response) => {
+                // console.warn(response.data.Authorization);
+                navigation.navigate('Home', { authkey: response.data.Authorization }); 
+            }) 
+            .catch((response) => {
+                    console.warn('등록되지 않은 사용자입니다.');
+            });
         // validateUser
-        navigation.navigate('Home');
     }
     const onRegisterPressed = () => {
-        // console.warn('ㅎㅚ원ㅏㅣ');
         navigation.navigate('SignUp');
     }
     
