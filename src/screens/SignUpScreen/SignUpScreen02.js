@@ -55,11 +55,11 @@ const SignUpScreen02 = ( {route} ) => {
                 console.warn(response);
         });
 
-        navigation.navigate('SignUp03', { authkey: authKey });
+        navigation.navigate('SignUpimg', { authkey: authKey });
     }
     
     return(
-        <ScrollView showsVerticalScrollIndicator={false}>
+        // <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.root}>
             <View style={[styles.logoTxt, {height: height * 0.22}]}>
                 <Text style={[styles.pointTxt]}>당신에</Text>
@@ -76,12 +76,13 @@ const SignUpScreen02 = ( {route} ) => {
 
             <CustomButton text="Next" onPress={onSignInPressed} />
         </View>
-        </ScrollView>
+        // </ScrollView>
     )
 };
 
 const styles = StyleSheet.create({
     root: {
+        flex:1,
         alignItems:'center',
         padding: 20,
         backgroundColor:"#fff"

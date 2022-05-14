@@ -9,7 +9,7 @@ import Header from "../ChattingRoomScreen/Header";
 import Body from "../ChattingRoomScreen/Body";
 import Hosi from '../../../assets/images/hosi.jpg';
 import ChatApp from "../ChattingRoomScreen/App";
-
+import SignUpScreen_img from "../SignUpScreen/SignUpScreen_img";
 const Tab = createBottomTabNavigator();
 function UserList() {
     return (
@@ -47,7 +47,6 @@ function Chatting() {
   const onSignInPressed = () => {
     navigation.navigate('SignUp02', { authkey: authKey }); 
 
-      console.warn('log');
   }
     return (
       <View style={styles.container}>
@@ -109,7 +108,7 @@ const HomeScreen = ({route}) => {
             name="UserList"
             component={UserList}
             options={{
-              tabBarLabel: 'User',
+              // tabBarLabel: 'User',
               tabBarIcon: ({ color, size }) => (
                 <Feather name="user" size={24} color="black" />
               ),
@@ -121,7 +120,7 @@ const HomeScreen = ({route}) => {
             options={{
               headerShown:false,
 
-              tabBarLabel: 'Chatting',
+              // tabBarLabel: 'Chatting',
               tabBarIcon: ({ color, size }) => (
                 <Ionicons name="chatbubbles-outline" size={24} color="black" />
               ),
@@ -133,7 +132,7 @@ const HomeScreen = ({route}) => {
             initialParams={{authKey: authKey_}}
             options={{
               headerShown:false,
-              tabBarLabel: 'MyPage',
+              // tabBarLabel: 'MyPage',
               tabBarIcon: ({ color, size }) => (
                 <Entypo name="dots-three-horizontal" size={24} color="black" />
               ),

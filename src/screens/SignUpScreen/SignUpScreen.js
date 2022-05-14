@@ -50,7 +50,7 @@ const SignUpScreen = () => {
     }
 
     return (
-        <ScrollView showsVerticalScrollIndicator={false}>
+        // <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.root}>
             <View style={[styles.logoTxt, {height: height * 0.25}]}>
                 <Text style={[styles.pointTxt]}>당신을</Text>
@@ -66,12 +66,13 @@ const SignUpScreen = () => {
 
             <CustomButton text="Next" onPress={onSignInPressed} />
         </View>
-        </ScrollView>
+        // </ScrollView>
     );
 };
 
 const styles = StyleSheet.create({
     root: {
+        flex:1,
         alignItems:'center',
         padding: 20,
         backgroundColor:"#fff"

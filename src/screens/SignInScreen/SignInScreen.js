@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 import { View, Text, Image, StyleSheet, useWindowDimensions } from 'react-native';
-import Logo from '../../../assets/images/logo-social.png';
+// import Logo from '../../../assets/images/logo-social.png';
+import Logo from '../../../assets/images/logo.svg';
 import CustomInput from "../../components/CustomInput";
 import CustomButton from "../../components/CustomButton";
 import axios from "axios";
@@ -41,18 +42,28 @@ const SignInScreen = () => {
 
     return (
         <View style={styles.root}>
-            <Image source={Logo} style={styles.logo, {height: height * 0.3}} resizeMode="contain"/>
-            <CustomInput placeholder="Username" value={username} setValue={setUsername}/>
-            <CustomInput placeholder="Password" value={password} setValue={setPassword} secureTextEntry={true}/>
+            <View style={styles.logoBox}> 
+            <Text style={styles.logoTxt}>작당</Text>
+            <Text style={styles.logoTxt}>모임</Text>
+            {/* <Image source={Logo} style={styles.logo, {height: height * 0.3}} resizeMode="contain"/> */}
+            </View>
+            <View style={styles.inputBox}> 
+            <CustomInput placeholder="이메일" value={username} setValue={setUsername}/>
+            <CustomInput placeholder="비밀번호" value={password} setValue={setPassword} secureTextEntry={true}/>
+            </View>
+            <View style={styles.buttonBox}> 
             <CustomButton text="로그인" onPress={onSignInPressed} />
             <CustomButton text="회원가입" onPress={onRegisterPressed} type="TERTIARY"/>
+            </View>
         </View>
     );
 };
 
 const styles = StyleSheet.create({
     root: {
-        alignItems:'center',
+        flex:1,
+
+        // alignItems:'center',
         padding: 20,
         backgroundColor:"#fff"
     },
@@ -63,5 +74,24 @@ const styles = StyleSheet.create({
         padding: 20,
         marginBottom:20
     },
+    logoTxt: {
+        fontSize:52,
+        fontWeight:"bold"
+    },
+    logoBox: {
+        flex:1,
+        justifyContent: "center", 
+        alignItems: "center"
+
+        // backgroundColor:"black"
+    },
+    inputBox: {
+        flex:1,
+        // backgroundColor:"#fff"
+    },
+    buttonBox: {
+        flex:1,
+        // backgroundColor:"black"
+    }
   });
 export default SignInScreen;
