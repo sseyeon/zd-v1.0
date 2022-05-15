@@ -10,6 +10,7 @@ import SignUpScreen from "../screens/SignUpScreen";
 import SignUpScreen02 from "../screens/SignUpScreen/SignUpScreen02";
 import SignUpScreen03 from "../screens/SignUpScreen/SignUpScreen03";
 import SignUpScreen_img from "../screens/SignUpScreen/SignUpScreen_img";
+import ChatScreen from "../screens/ChattingRoomScreen/ChatScreen";
 const Stack = createNativeStackNavigator();
 
 const Navigation = () => {
@@ -22,6 +23,7 @@ const Navigation = () => {
                 <Stack.Screen name="SignUp03" component={SignUpScreen03}  />
                 <Stack.Screen name="SignUpimg" component={SignUpScreen_img}  />
                 <Stack.Screen name="Home" component={HomeScreen} />
+                <Stack.Screen name="Chat" component={ChatScreen} />
             </Stack.Navigator>
         </NavigationContainer>
     );

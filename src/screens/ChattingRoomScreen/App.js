@@ -1,92 +1,156 @@
 import React from 'react';
-import { StyleSheet, View, Text, Image } from 'react-native';
-// import Header from './Header'
-// import Body from './Body'
-import Header from './Header';
-import Body from './Body';
+import { View, Image, Text, Button, StyleSheet, FlatList } from 'react-native';
+import {
+  Container,
+  Card,
+  UserInfo,
+  UserImgWrapper,
+  UserImg,
+  UserInfoText,
+  UserName,
+  PostTime,
+  MessageText,
+  TextSection,
+} from './MessageStyles';
 import Hosi from '../../../assets/images/hosi.jpg';
+import CustomButton from '../../components/CustomButton';
 
-export default class App extends React.Component {
-  // state 추가함.
-  state = {
-    todos: []
-  }
-  // 할일 추가 함수
-  addTodo = (todo) => {
-     
-    // 새로운 할일(todo) 객체 생성
-    const newTodo = {
-        id: Date.now(), // 등록시간
-        text: todo,      // 할일 내용
-        completed: false, // 완료 여부
-    }   
+const Messages = [
+  {
+    id: '1',
+    userName: '작당 모임',
+    userImg: require('../../../assets/users/user1.jpg'),
+    messageTime: '4 mins ago',
+    messageText:
+      '안녕하세요 :) 반갑습니다!',
+  },
+  {
+    id: '2',
+    userName: '삐삐',
+    userImg: require('../../../assets/users/user2.jpg'),
+    messageTime: '2 hours ago',
+    messageText:
+      '얼른 토마토 드세요!!',
+  },
+  {
+    id: '3',
+    userName: '이오이',
+    userImg: require('../../../assets/users/user3.jpeg'),
+    messageTime: '1 hours ago',
+    messageText:
+      '왜? 아직도 못드셨나용?',
+  },
+];
 
-    // state 업데이트
-    this.setState(prevState => ({
-        todos: [
-            newTodo,       // 새로 추가된 할일(todo)
-            ...prevState.todos // 기존의 할일 목록
-        ]
-    }));
-   
+const App = ({navigation}) => {
+  const onSignInPressed = () => {
+    // navigation.navigate('Home', { authkey: authKey }); 
   }
-  render() {
     return (
-      <View style={styles.container}>
-        {/* <Text style={styles.title}>Todo App</Text> */}
-        <View
-        style={{
-          flexDirection: 'row',
-          alignItems: 'center',
-          justifyContent: 'space-around',
-          paddingVertical: 20,
-        }}>
-        <View
-          style={{
-            alignItems: 'center',
-          }}>
-          <Image
-            source={Hosi}
-            style={{
-              resizeMode: 'cover',
-              width: 100,
-              height: 100,
-              borderRadius: 100,
-            }}
-          />
+      <View style={styles.root}>
+        <View style={styles.elem}>
+            <View style={styles.userInfo}>
+            <Image
+                source={Hosi}
+                style={{
+                  resizeMode: 'cover',
+                  width: 60,
+                  height: 60,
+                  borderRadius: 20,
+                }}
+              />
+              {/* <View style={styles.profile} /> */}
+              <Text style={styles.name}>김당근</Text>
+            </View>
+            <View style={styles.userComment}>
+              <Text>#만반잘부</Text>
+            </View>
+          </View>
+          <View style={styles.area01}>
+              <Text>광고 자리</Text>
+          </View>
+
+        <View style={styles.area02}>
+          <View>
+            <FlatList 
+              data={Messages}
+              keyExtractor={item=>item.id}
+              renderItem={({item}) => (
+                <Card onPress={() => navigation.navigate('Chat', {userName: item.userName})}>
+                  <UserInfo>
+                    <UserImgWrapper>
+                      <UserImg source={item.userImg} />
+                    </UserImgWrapper>
+                    <TextSection>
+                      <UserInfoText>
+                        <UserName>{item.userName}</UserName>
+                        <PostTime>{item.messageTime}</PostTime>
+                      </UserInfoText>
+                      <MessageText>{item.messageText}</MessageText>
+                    </TextSection>
+                  </UserInfo>
+                </Card>
+              )}
+            />
+
+          </View>
         </View>
-        <View style={{alignItems: 'center'}}>
-          {/* <Text style={{fontWeight: 'bold', fontSize: 18}}>{post}</Text> */}
-          <Text style={{fontWeight: 'bold', fontSize: 18, marginBottom:5}}>김당근</Text>
-          <Text>#만반잘부</Text>
-        </View>
-        <View style={{alignItems: 'center'}}>
-          <Text style={{fontWeight: 'bold', fontSize: 18}}></Text>
-          <Text></Text>
-        </View>
-        <View style={{alignItems: 'center'}}>
-          <Text style={{fontWeight: 'bold', fontSize: 18}}></Text>
-          <Text></Text>
-        </View>
-      </View>
-        <Header addTodo={this.addTodo}/>
-        <Body todos={this.state.todos}/>
+        <CustomButton text="모임 추천 받기" onPress={onSignInPressed} />
+
       </View>
     );
-  }
-}
+};
+
+export default App;
 
 const styles = StyleSheet.create({
+  root: {
+    flex:1,
+    alignItems:'center',
+    padding: 20,
+    backgroundColor:"#fff"
+},
   container: {
-    flex: 1,
-    flexDirection: 'column',
-    paddingTop: 20,
-    backgroundColor: "#EEE",
+    flex: 1, 
+    alignItems: 'center', 
+    justifyContent: 'center'
   },
-  title: {
-    fontWeight: "800",
-    fontSize: 30, 
-    marginLeft: 20,
-    marginBottom: 20,
+  area01: {
+    flex: 1
+  },
+  area02: {
+    flex: 6, 
+    alignItems: 'center', 
+    justifyContent: 'center'
+  },
+  elem: {
+    flex:1,
+    width: '100%',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    borderColor:'#eee',
+    borderBottomWidth:0.5,
+    padding: 5,
+  },
+  userInfo: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  userComment: {
+    padding:8,
+    backgroundColor:'yellow',
+    borderRadius:5,
+  },
+  profile: {
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+    backgroundColor: 'yellow',
+  },
+  name: {
+    paddingLeft: 10,
+    fontWeight:"bold",
+    fontSize:32
   }
 });

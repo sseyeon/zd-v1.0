@@ -19,82 +19,105 @@ function UserList() {
     );
 }
   
-function Chatting() {
-  // state = {
-  //   todos: []
-  // }
-  // // 할일 추가 함수
-  // addTodo = (todo) => {
+// function Chatting() {
+//   // state = {
+//   //   todos: []
+//   // }
+//   // // 할일 추가 함수
+//   // addTodo = (todo) => {
      
-  //   // 새로운 할일(todo) 객체 생성
-  //   const newTodo = {
-  //       id: Date.now(), // 등록시간
-  //       text: todo,      // 할일 내용
-  //       completed: false, // 완료 여부
-  //   }   
+//   //   // 새로운 할일(todo) 객체 생성
+//   //   const newTodo = {
+//   //       id: Date.now(), // 등록시간
+//   //       text: todo,      // 할일 내용
+//   //       completed: false, // 완료 여부
+//   //   }   
 
-  //   // state 업데이트
-  //   this.setState(prevState => ({
-  //       todos: [
-  //           newTodo,       // 새로 추가된 할일(todo)
-  //           ...prevState.todos // 기존의 할일 목록
-  //       ]
-  //   }));
+//   //   // state 업데이트
+//   //   this.setState(prevState => ({
+//   //       todos: [
+//   //           newTodo,       // 새로 추가된 할일(todo)
+//   //           ...prevState.todos // 기존의 할일 목록
+//   //       ]
+//   //   }));
    
-  //   // 콘솔창에 출력해보자~
-  //   console.log(this.state.todos);
-  // }
-  const onSignInPressed = () => {
-    navigation.navigate('SignUp02', { authkey: authKey }); 
+//   //   // 콘솔창에 출력해보자~
+//   //   console.log(this.state.todos);
+//   // }
+//   const onSignInPressed = () => {
+//     navigation.navigate('SignUp02', { authkey: authKey }); 
 
-  }
-    return (
-      <View style={styles.container}>
-        {/* <Text style={styles.title}>Todo App</Text> */}
-        <View
-        style={{
-          flexDirection: 'row',
-          alignItems: 'center',
-          justifyContent: 'space-around',
-          paddingVertical: 20,
-        }}>
-        <View
-          style={{
-            alignItems: 'center',
-          }}>
-          <Image
-            source={Hosi}
-            style={{
-              resizeMode: 'cover',
-              width: 100,
-              height: 100,
-              borderRadius: 100,
-            }}
-          />
-        </View>
-        <View style={{alignItems: 'center'}}>
-          {/* <Text style={{fontWeight: 'bold', fontSize: 18}}>{post}</Text> */}
-          <Text style={{fontWeight: 'bold', fontSize: 18, marginBottom:5}}>김당근</Text>
-          <Text>#만반잘부</Text>
-        </View>
-        <View style={{alignItems: 'center'}}>
-          <Text style={{fontWeight: 'bold', fontSize: 18}}></Text>
-          <Text></Text>
-        </View>
-        <View style={{alignItems: 'center'}}>
-          <Text style={{fontWeight: 'bold', fontSize: 18}}></Text>
-          <Text></Text>
-        </View>
-      </View>
-        <Header />
-        <Body />
-      </View>
-    );
-}
+//   }
+//     return (
+//       <View style={styles.container}>
+//         {/* <Text style={styles.title}>Todo App</Text> */}
+//         <View
+//         style={{
+//           flexDirection: 'row',
+//           alignItems: 'center',
+//           justifyContent: 'space-around',
+//           paddingVertical: 20,
+//         }}>
+//         <View
+//           style={{
+//             alignItems: 'center',
+//           }}>
+//           <Image
+//             source={Hosi}
+//             style={{
+//               resizeMode: 'cover',
+//               width: 100,
+//               height: 100,
+//               borderRadius: 100,
+//             }}
+//           />
+//         </View>
+//         <View style={{alignItems: 'center'}}>
+//           {/* <Text style={{fontWeight: 'bold', fontSize: 18}}>{post}</Text> */}
+//           <Text style={{fontWeight: 'bold', fontSize: 18, marginBottom:5}}>김당근</Text>
+//           <Text>#만반잘부</Text>
+//         </View>
+//         <View style={{alignItems: 'center'}}>
+//           <Text style={{fontWeight: 'bold', fontSize: 18}}></Text>
+//           <Text></Text>
+//         </View>
+//         <View style={{alignItems: 'center'}}>
+//           <Text style={{fontWeight: 'bold', fontSize: 18}}></Text>
+//           <Text></Text>
+//         </View>
+//       </View>
+//         <Header />
+//         <Body />
+//       </View>
+//     );
+// }
   
 
 
 
+// function getHeaderTitle(route) {
+//   // tab navigator의 `route.state` state를 사용한다
+//   const routeName = route.state
+//     ? route.state.routes[route.state.index].name // 현재 active된 route name을 tab navigator에서 가져온다
+//     : route.params?.screen || 'Home';
+
+//   switch (routeName) {
+//     case 'Home':
+//       return 'GEAGURI';
+//     case 'Settings':
+//       return 'GEAGURI Setting';
+//   }
+// }
+const getTabBarVisibility = (route) => {
+  const routeName = route.state
+    ? route.state.routes[route.state.index].name
+    : '';
+
+  if (routeName === 'Chatting') {
+    return false;
+  }
+  return true;
+};
 const HomeScreen = ({route}) => {
   const authKey_ = route.params.authkey;
     return (
@@ -117,10 +140,19 @@ const HomeScreen = ({route}) => {
           <Tab.Screen
             name="Chatting"
             component={ChatApp}
+            // options={({route}) => ({
+            //   tabBarVisible: getTabBarVisibility(route),
+            //   // Or Hide tabbar when push!
+            //   // https://github.com/react-navigation/react-navigation/issues/7677
+            //   // tabBarVisible: route.state && route.state.index === 0,
+            //   // tabBarLabel: 'Home',
+            //   tabBarIcon: ({color, size}) => (
+            //     <Ionicons name="chatbubbles-outline" size={24} color="black" />
+            //   ),
+            // })}
             options={{
               headerShown:false,
-
-              // tabBarLabel: 'Chatting',
+              tabBarLabel: 'Chatting',
               tabBarIcon: ({ color, size }) => (
                 <Ionicons name="chatbubbles-outline" size={24} color="black" />
               ),

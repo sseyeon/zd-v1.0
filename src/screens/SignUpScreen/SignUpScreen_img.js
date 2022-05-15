@@ -38,7 +38,6 @@ export default function SignUpScreen_img({route}) {
     const authKey = route.params.authkey;
     const navigation = useNavigation();
 
-    console.log(authKey);
     const [image, setImage] = useState(null);
 
     const pickImage = async () => {
@@ -56,7 +55,6 @@ export default function SignUpScreen_img({route}) {
   };
 
     const onSignInPressed = () => {
-        // navigation.navigate('SignUpimg', { authkey: authKey });
         navigation.navigate('Home', { authkey: authKey }); 
 
     }
