@@ -16,12 +16,13 @@ import CustomButton from "../../components/CustomButton";
 
 const MyPageBody = ({route}) => {
 //   const authKey = route.params.authKey;
-console.warn('drd' + route);
     const {name} = "seyeonh";
     const {accountName} = "setse";
     const {profileImage} = {Logo};
+    const navigation = useNavigation();
+
     const onSignInPressed = () => {
-      navigation.navigate('SignUp02', { authkey: authKey }); 
+      navigation.navigate('MyPageEdit', { authkey: authKey }); 
 
         console.warn('log');
     }

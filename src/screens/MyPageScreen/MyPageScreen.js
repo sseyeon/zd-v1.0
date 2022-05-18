@@ -10,8 +10,10 @@ import Hosi from '../../../assets/images/hosi.jpg';
 import BottomTabView from "./BottomTabView";
 const MyPageScreen = ( {route} ) => {
     const authKey = route.params.authKey;
+    const navigation = useNavigation();
+
     const onSignInPressed = () => {
-        navigation.navigate('SignUp02', { authkey: authKey }); 
+        navigation.navigate('MyPageEdit', { authkey: authKey }); 
     }
     return (
         <View style={{ width:'100%', height:'100%', backgroundColor:'white' }}>
